@@ -126,7 +126,7 @@ class SnaptoCursor(object):
                 Xk = np.fft.fft(y_windows)
                 E_fft = np.sum(np.abs(Xk) ** 2) / N
                 # print("Efft: ",E_fft)
-                if(len(np.nonzero(z)[0])>110) or (E_fft<5):
+                if(len(np.nonzero(z)[0])>90) or (E_fft<4):
 
                     f0_list.append(0)
                     time_ptr.append(x)
@@ -143,6 +143,7 @@ class SnaptoCursor(object):
                 second_arcf_loc = argmax(R_second_list[start:]) + start
                 # print(float(self.sr) / (second_arcf_loc))
                 f0_list.append(float(self.sr) / (second_arcf_loc+1))
+                print("f0: ", float(self.sr) / (second_arcf_loc+1))
                 time_ptr.append(x)
                 x += window_len / 2
             except Exception as e:
@@ -168,7 +169,7 @@ class SnaptoCursor(object):
                 N = len(y_windows)
                 Xk = np.fft.fft(y_windows)
                 E_fft = np.sum(np.abs(Xk) ** 2) / N
-                if (len(np.nonzero(z)[0]) > 110) or (E_fft < 5):
+                if (len(np.nonzero(z)[0]) > 90) or (E_fft < 4):
                     f0_list.append(0)
                     time_ptr.append(x)
                     x += window_len / 2
